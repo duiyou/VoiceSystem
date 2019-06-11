@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_margin="10dp"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/chatactivity_listroboticon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/robot_icon"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/chatactivity_listroboticon"
+        android:background="@drawable/listrobot_frame">
+
+        <TextView
+            android:id="@+id/robot_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="#00000000"
+            android:maxWidth="210dp"
+            android:text="你好啊啊啊啊啊啊啊啊啊。啊啊啊啊。啊啊啊。啊啊啊爱爱"
+            android:textColor="#000000"
+            android:textSize="25sp" />
+    </LinearLayout>
+</RelativeLayout>

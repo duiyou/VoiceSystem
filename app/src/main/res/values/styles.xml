@@ -8,6 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!--主活动单选导航栏风格-->
     <style name="main_activity_list_style">
         <!-- Customize your theme here. -->
         <item name="android:layout_height">match_parent</item>
@@ -19,6 +20,18 @@
         <item name="android:paddingTop">5dp</item>
         <item name="android:drawablePadding">5dp</item>
         <item name="android:textColor">@drawable/main_activity_list_textcolor_selector</item>
+    </style>
 
+
+    <!--聊天界面语音对话框theme-->
+    <style name="chat_activity_dialogtheme">
+        <!--透明背景色-->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFrame">@null</item>
+        <!--是否浮动如果为false则就是全屏幕大小，如果为true则为wrap_content-->
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <!--屏幕是否变暗-->
+        <item name="android:backgroundDimEnabled">false</item>
     </style>
 </resources>
