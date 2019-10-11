@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class ChatActivity extends BaseActivity {
     //适配器的信息集合
-    private List<Msg> mList=new ArrayList<Msg>();
+    private List<Msg> mList = new ArrayList<Msg>();
     //适配器
     private MsgAdapter mMsgAdapter;
     //滚动控件RecyclerView
@@ -30,27 +30,29 @@ public class ChatActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chat_activity_layout);
         //初始化滚动控件
-        mRecyclerView=(RecyclerView)findViewById(R.id.chatactivity_list);
-        LinearLayoutManager mLayoutManager=new LinearLayoutManager(this);
+        mRecyclerView = (RecyclerView)findViewById(R.id.chatactivity_list);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mMsgAdapter=new MsgAdapter(mList);
+        mMsgAdapter = new MsgAdapter(mList);
         mRecyclerView.setAdapter(mMsgAdapter);
 
     }
+    //刷新滚动控件，显示最后一行
     public void notifyItemInserted(String content,int type){
         //创建Msg并传入类型
-        Msg mMsg=new Msg(content,type);
+        Msg mMsg = new Msg(content,type);
         //添加到集合（因为传入的就是这个集合，所以集合add以后另外一边也是同样的mList，刷新即可）
         mList.add(mMsg);
         //刷新滚动控件
-        mMsgAdapter.notifyItemInserted(mList.size()-1);
+        mMsgAdapter.notifyItemInserted(mList.size() - 1);
         //显示到最后一行
-        mRecyclerView.scrollToPosition(mList.size()-1);
+        mRecyclerView.scrollToPosition(mList.size() - 1);
     }
     //销毁活动的时候
     @Override
     protected void onDestroy() {
-        if(SpeechSynthesisUtil.mSpeechSynthesisUtil!=null){
+        if(SpeechSynthesisUtil.mSpeechSynthesisUtil != null){
+            //关闭语音合成工具类
             SpeechSynthesisUtil.mSpeechSynthesisUtil.Destpry();
         }
         super.onDestroy();
@@ -58,7 +60,7 @@ public class ChatActivity extends BaseActivity {
     //准备去打开另一个活动时就暂停播放哦
     @Override
     protected void onPause() {
-        if(SpeechSynthesisUtil.mSpeechSynthesisUtil!=null){
+        if(SpeechSynthesisUtil.mSpeechSynthesisUtil != null){
             SpeechSynthesisUtil.mSpeechSynthesisUtil.stop();
         }
         super.onPause();
@@ -66,7 +68,7 @@ public class ChatActivity extends BaseActivity {
     }
     //开始这个活动
     public static void actionStart(Context context){
-        Intent intent=new Intent(context, ChatActivity.class);
+        Intent intent = new Intent(context, ChatActivity.class);
         context.startActivity(intent);
     }
 }

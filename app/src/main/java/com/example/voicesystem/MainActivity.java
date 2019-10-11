@@ -18,13 +18,17 @@ import com.example.ChatInterface.SpeechSynthesisUtil;
  */
 public class MainActivity extends BaseActivity {
     private static final String TAG = "MainActivity";
+    //碎片ID
+    private int fragmentID = R.id.mainactivity_fragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //得到许可
         getpermissions();
         setContentView(R.layout.mainactivity_layout);
+        //碎片1
         MainActivityFragment1 mainActivityFragment1=new MainActivityFragment1();
+        //初始化的时候就用碎片1
         replaceFragment(mainActivityFragment1);
     }
 
@@ -37,11 +41,11 @@ public class MainActivity extends BaseActivity {
         }
         return true;
     }
-    //切换碎片
+    //切换碎片（用fragment替换fragmentID这个取域）
     private void replaceFragment(Fragment fragment){
         FragmentManager fragmentManager=getSupportFragmentManager();
         FragmentTransaction transaction=fragmentManager.beginTransaction();
-        transaction.replace(R.id.mainactivity_fragment,fragment);
+        transaction.replace(fragmentID,fragment);
         transaction.commit();
     }
 

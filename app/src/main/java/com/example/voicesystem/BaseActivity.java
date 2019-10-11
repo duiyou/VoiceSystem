@@ -12,12 +12,13 @@ public class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //打印当前活动名
         //Log.d("BaseActivity",getClass().getSimpleName());
-
+        //创建时加入活动管理器
         ActivityCollector.addActivity(this);
 
     }
     protected void onDestroy(){
         super.onDestroy();
+        //销毁时移除活动管理器
         ActivityCollector.removeActivity(this);
     }
 }

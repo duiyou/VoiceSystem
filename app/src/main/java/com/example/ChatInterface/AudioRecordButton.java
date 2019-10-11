@@ -23,15 +23,15 @@ import com.example.voicesystem.R;
 //自身继承监听接口，可以监听到MedieReocrder的信息
 public class AudioRecordButton extends android.support.v7.widget.AppCompatButton implements AudioManager.AudioStateListener,SpeechRecognitionUtil.speechRecognitionListener,RobotUtil.robotReplyListener{
     //移动手指取消录音的距离
-    private static final int DISTANCE_Y_CANCEL=100;
+    private static final int DISTANCE_Y_CANCEL = 100;
     //按钮的三种状态正常状态，录音状态，想取消状态
-    private static final int STATE_NORMAL=1;
-    private static final int STATE_RECORDING=2;
-    private static final int STATE_WANT_TO_CANCEL=3;
+    private static final int STATE_NORMAL = 1;
+    private static final int STATE_RECORDING = 2;
+    private static final int STATE_WANT_TO_CANCEL = 3;
     //当前按钮状态,默认为NORMAL状态
-    private int nowCurState=STATE_NORMAL;
+    private int nowCurState = STATE_NORMAL;
     //判断是否正在录音
-    private boolean isRecording=false;
+    private boolean isRecording = false;
     //对话框管理类
     private DialogManager mDialogManager;
     //录音管理类
@@ -43,11 +43,13 @@ public class AudioRecordButton extends android.support.v7.widget.AppCompatButton
     //用于计时
     private float mTime=0;
     //是否触发longclick，长按了按钮
-    private boolean isLongClick=false;
+    private boolean isLongClick = false;
     //当前活动
     private ChatActivity mChatActivity;
     //语音合成类
     private SpeechSynthesisUtil mSpeechSynthesisUtil;
+    //文件路径
+    private String filePath = "/imooc_recorder_audios";
     //语音识别结果
     //private String recognitionContent;
     //机器人回复
@@ -59,14 +61,19 @@ public class AudioRecordButton extends android.support.v7.widget.AppCompatButton
     //构造函数
     public AudioRecordButton(Context context, AttributeSet attrs) {
         super(context, attrs);
-        mChatActivity=(ChatActivity)getContext();
-        mSpeechSynthesisUtil=SpeechSynthesisUtil.getInstance(getContext());
+        //获取该控件所在的活动
+        mChatActivity = (ChatActivity)getContext();
+        //语音合成单例类
+        mSpeechSynthesisUtil = SpeechSynthesisUtil.getInstance(getContext());
+        //初始化语音合成（应当读取设置文本的！！！！！！！！！！！！！！！！！！）
         mSpeechSynthesisUtil.init("0","5","6","3");
         //创建机器人工具类
-        mRobotUtile=new RobotUtil();
+        mRobotUtile = new RobotUtil();
+        //设置机器人工具类监听
         mRobotUtile.setRobotReplyListener(this);
         //创建对话框管理类,传入当前Context
-        mDialogManager=new DialogManager(getContext());
+        mDialogManager = new DialogManager(getContext());
+
 
 //        你的apk装到哪个盘里，那个盘就认为是外部存储器，这么说，不是很准确。
 //        可以这么说，除了你的后来装到手机上的内存卡叫sdcard外，手机本身也有sdcard的成分，
@@ -77,13 +84,13 @@ public class AudioRecordButton extends android.support.v7.widget.AppCompatButton
 //        你获取的总容量就是你内存卡的总量，可用容量就是你内存卡的可用容量。
 
         //在存储卡创建的存放音频的文件夹名称,getExternalStorageDirectory是获取外部存储文件夹，即SD卡
-        String dir= Environment.getExternalStorageDirectory()+"/imooc_recorder_audios";
+        String dir = Environment.getExternalStorageDirectory()+filePath;
         //单例mAudioManager，传入存储文件地址
-        mAudioManager=AudioManager.getInstance(dir);
+        mAudioManager = AudioManager.getInstance(dir);
         //mAudioManager设置监听，即自定义Button监听到了AudioManager，AudioManager准备好了录音就会让本Button知道
         mAudioManager.setOnAudioStateListener(this);
         //初始化语音识别类
-        mSpeechRecognitionUtil=new SpeechRecognitionUtil();
+        mSpeechRecognitionUtil = new SpeechRecognitionUtil();
         //mSpeechRecognitionUtil设置监听，即自定义Button监听到了mSpeechRecognitionUtil，mSpeechRecognitionUtil识别完后就让本Button知道
         mSpeechRecognitionUtil.setSpeechRecognitionListener(this);
 
@@ -92,7 +99,7 @@ public class AudioRecordButton extends android.support.v7.widget.AppCompatButton
             @Override
             public boolean onLongClick(View v) {
                 //长按判断
-                isLongClick=true;
+                isLongClick = true;
                 //准备录音
                 mAudioManager.prepareAudio();
                 return false;
@@ -100,14 +107,14 @@ public class AudioRecordButton extends android.support.v7.widget.AppCompatButton
         });
     }
     /**
-     * 录音完成后的回调接口
+     * 录音完成后的回调接口(未使用）
      */
-    public interface AudioFinishRecorderListener{
-        void onFinish(float seconds,String filePath);
+    public interface AudioFinishRecorderListener {
+        void onFinish(float seconds, String filePath);
     }
     private AudioFinishRecorderListener mListener;
     public void setAudioFinishRecorderListener(AudioFinishRecorderListener listener){
-        mListener=listener;
+        mListener = listener;
     }
 
     /**
@@ -122,7 +129,7 @@ public class AudioRecordButton extends android.support.v7.widget.AppCompatButton
                     //当正在录音时，每0.1秒都会去让Handle改变音量大小
                     Thread.sleep(100);
                     //计时
-                    mTime+=0.1f;
+                    mTime += 0.1f;
                     //必须让mHandle去改变声音大小，不能在开的线程改变，因为只有在mHandle里换图片时UI才会刷新
                     mHandler.sendEmptyMessage(MSG_VOICE_CHANGED);
                 } catch (InterruptedException e) {
@@ -136,11 +143,11 @@ public class AudioRecordButton extends android.support.v7.widget.AppCompatButton
     };
 
     //信息常量，任意值
-    private static final  int MSG_AUDIO_PREPARED=0X110;
-    private static final  int MSG_VOICE_CHANGED=0X111;
-    private static final  int MSG_AUDIO_DIMISS=0X112;
-    private static final int MSG_SEND=0X113;
-    private static final int MSG_RECEIVED=0X114;
+    private static final  int MSG_AUDIO_PREPARED = 0X110; //录音
+    private static final  int MSG_VOICE_CHANGED = 0X111;  //改变音量图片
+    private static final  int MSG_AUDIO_DIMISS = 0X112;   //关闭对话框
+    private static final int MSG_SEND = 0X113;            //发送信息
+    private static final int MSG_RECEIVED = 0X114;        //接收信息
     @SuppressLint("HandlerLeak")
     //线程处理类
     private Handler mHandler=new Handler()
@@ -150,35 +157,38 @@ public class AudioRecordButton extends android.support.v7.widget.AppCompatButton
         public void handleMessage(Message msg) {
             Bundle mBundle;
             switch (msg.what){
+                //正在录音
                 case MSG_AUDIO_PREPARED:
                     //判断为正在录音
-                    isRecording=true;
+                    isRecording = true;
                     //显示对话框，默认就是正在录音的布局了，不必再mDialogManager.recording()
                     mDialogManager.showRecordingDialog();
                     //准备好录音以后子线程开始更改音量，即每
                     new Thread(mVoiceLevelRunnable).start();
                     break;
+                //改变音量
                 case MSG_VOICE_CHANGED:
                     mDialogManager.updateVoiceLevel(mAudioManager.getVoiceLevel(7));
                     break;
+                //关闭对话框
                 case MSG_AUDIO_DIMISS:
                     //关闭对话框
                     mDialogManager.dismissDialog();
                     break;
+                //发送信息
                 case MSG_SEND://List插入新的发送信息的元素
-                    mBundle=msg.getData();
-                    String recognitionContent =mBundle.getString("recognitionContent");
+                    mBundle = msg.getData();
+                    String recognitionContent = mBundle.getString("recognitionContent");
                     mChatActivity.notifyItemInserted(recognitionContent,Msg.TYPE_SEND);
                     break;
+                //接收信息
                 case MSG_RECEIVED://List插入新的接收信息的元素
-                    mBundle=msg.getData();
+                    mBundle = msg.getData();
                     String robotResultContent =mBundle.getString("robotResultContent");
                     mChatActivity.notifyItemInserted(robotResultContent,Msg.TYPE_RECEIVED);
                     break;
             }
-
         };
-
     };
 
     //录音类准备好录音时回调给Button，让Button去修改Dialog
@@ -190,17 +200,17 @@ public class AudioRecordButton extends android.support.v7.widget.AppCompatButton
     //语音识别工具类识别好结果responseResult给Button，让Button进行接下来的操作
     public void wellRecognition(String responseResult){
         //为Message传入信息，参考https://blog.csdn.net/qq_37321098/article/details/81535449
-        Bundle bundle=new Bundle();
+        Bundle bundle = new Bundle();
         //传入key，value
         bundle.putString("recognitionContent",responseResult);
-        Message message=Message.obtain();
+        Message message = Message.obtain();
         message.setData(bundle);
-        message.what=MSG_SEND;
+        message.what = MSG_SEND;
         mHandler.sendMessage(message);
         //更新列表以后让机器人回复
         mRobotUtile.robotReply(responseResult);
     }
-    //机器人回复了robotReplyContent，让Button进行接下来的操作
+    //机器人回复了robotReply，让Button进行接下来的操作
     public void wellRobotReply(String robotReply){
         //先播放再去显示
         mSpeechSynthesisUtil.speak(robotReply);
@@ -208,9 +218,9 @@ public class AudioRecordButton extends android.support.v7.widget.AppCompatButton
         Bundle bundle=new Bundle();
         //传入key，value
         bundle.putString("robotResultContent",robotReply);
-        Message message=Message.obtain();
+        Message message = Message.obtain();
         message.setData(bundle);
-        message.what=MSG_RECEIVED;
+        message.what = MSG_RECEIVED;
         mHandler.sendMessage(message);
 
     }
@@ -219,8 +229,8 @@ public class AudioRecordButton extends android.support.v7.widget.AppCompatButton
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         //手指在控件上的x，y坐标
-        int x=(int) event.getX();
-        int y= (int) event.getY();
+        int x = (int) event.getX();
+        int y = (int) event.getY();
         //按键状态，获取事件类型
         switch (event.getAction()){
             //手指触摸屏幕
@@ -259,7 +269,7 @@ public class AudioRecordButton extends android.support.v7.widget.AppCompatButton
                     mAudioManager.cancel();
                     //在延迟了1.3秒之后发送录音关闭语句，在那里关闭对话框，但之后的代码也会继续执行，异步
                     mHandler.sendEmptyMessageDelayed(MSG_AUDIO_DIMISS,1300);
-                }else if(nowCurState==STATE_RECORDING){      //如果正常录制结束
+                }else if(nowCurState == STATE_RECORDING){      //如果正常录制结束
                     //直接关闭对话框
                     mDialogManager.dismissDialog();
                     //释放录音资源
@@ -271,11 +281,11 @@ public class AudioRecordButton extends android.support.v7.widget.AppCompatButton
 
 
                     //回调给监听自定义按钮的活动,告诉已经保存好了录音了
-                    if(mListener!=null){
+                    if(mListener != null){
                         mListener.onFinish(mTime,mAudioManager.getCurrentFilePath());
                     }
                 //如果是想取消录音的
-                }else if(nowCurState==STATE_WANT_TO_CANCEL){
+                }else if(nowCurState == STATE_WANT_TO_CANCEL){
                     //关闭对话框
                     mDialogManager.dismissDialog();
                     //取消保存录音
@@ -290,9 +300,9 @@ public class AudioRecordButton extends android.support.v7.widget.AppCompatButton
     }
     //每次按键结束以后恢复一些标志位
     private void reset() {
-        isRecording=false;
-        isLongClick=false;
-        mTime=0;
+        isRecording = false;
+        isLongClick = false;
+        mTime = 0;
         changeState(STATE_NORMAL);
     }
     //判断手指是否在区域外
@@ -310,7 +320,7 @@ public class AudioRecordButton extends android.support.v7.widget.AppCompatButton
     //改变此时按钮状态，同时也改变对话框
     private void changeState(int state) {
         //如果此时状态和改变状态不同才需要改变
-        if(nowCurState!=state){
+        if(nowCurState != state){
             //先改变状态
             nowCurState=state;
             switch(state){

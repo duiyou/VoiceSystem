@@ -13,10 +13,10 @@ public class AudioManager {
     private String mDir;
     //文件全路径
     private String mCurrentFilePath;
-    //全局静态类
+    //全局静态录音类
     private static AudioManager mInstance;
     //是否已经准备好录音了
-    private boolean isPrepaerd=false;
+    private boolean isPrepaerd = false;
 
     //构造函数，传入存储音频文件夹路径
     private AudioManager(String dir){
@@ -40,11 +40,11 @@ public class AudioManager {
 
 //    此类使用单例模式，方法取得单例类对象
     public static AudioManager getInstance(String dir){
-        if(mInstance==null){
+        if(mInstance == null){
             //加锁，在实例化的过程中不允许其他地方实例化
             synchronized (AudioManager.class){
-                if(mInstance==null){
-                    mInstance=new AudioManager(dir);
+                if(mInstance == null){
+                    mInstance = new AudioManager(dir);
                 }
             }
         }
@@ -56,7 +56,7 @@ public class AudioManager {
     public void prepareAudio(){
         try {
             //还没准备好之前默认为false
-            isPrepaerd=false;
+            isPrepaerd = false;
             //存储的文件夹
             File dir=new File(mDir);
             if(!dir.exists()){

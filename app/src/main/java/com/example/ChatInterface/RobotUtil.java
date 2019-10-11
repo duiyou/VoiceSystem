@@ -61,6 +61,7 @@ public class RobotUtil {
                             jsonObject = new JSONObject(t);
                             //通过key（text）获取value，即获得机器人回复的结果
                             String text = jsonObject.getString("text");
+                            Log.d("机器人啊", text);
                             if(mListener!=null){
                                 mListener.wellRobotReply(text);
                             }

@@ -37,10 +37,14 @@ public class MainActivityFragment1 extends Fragment implements View.OnClickListe
         //智能聊天按钮
         relativeLayout1=view.findViewById(R.id.mainactivity_fragment1_bottom_relativelayout1);
         relativeLayout1.setOnClickListener(this);//设置监听
+
+        /***********其他按钮**********************/
+
+
         //语音设置按钮
         relativeLayout6=view.findViewById(R.id.mainactivity_fragment1_bottom_relativelayout6);
         relativeLayout6.setOnClickListener(this);//设置监听
-        //创建碎片时设置活动中的ActionBar
+        //创建碎片时设置活动中的ActionBar--标题栏
         setActionBar();
         return view;
     }
@@ -57,6 +61,7 @@ public class MainActivityFragment1 extends Fragment implements View.OnClickListe
                 break;
         }
     }
+
     //设置标题栏
     private void setActionBar(){
         toolbar.setTitle("APP名称xxx");
