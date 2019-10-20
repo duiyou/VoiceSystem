@@ -48,6 +48,8 @@
         </activity>
         <activity android:name="com.example.ChatInterface.ChatActivity">
         </activity>
+        <activity android:name="com.example.TranslateInterface.TranslateActivity">
+        </activity>
         <activity android:name="com.example.SpeechSetInterface.SpeechSetActivity"
             android:windowSoftInputMode="stateUnchanged|adjustResize">
             <!--windowSoftInputMode软键盘打开方式，参考https://blog.csdn.net/chenli_001/article/details/64919978-->
