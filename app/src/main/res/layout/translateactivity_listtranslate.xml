@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="left"
+    android:background="#00000000">
+    <TextView
+        android:id="@+id/translate_activity_list_translatetextview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/translate_activity_list_background"
+        android:gravity="left"
+        android:maxWidth="240dp"
+        android:paddingLeft="15dp"
+        android:paddingTop="8dp"
+        android:paddingRight="3dp"
+        android:paddingBottom="8dp"
+        android:text="你在说啥啊啊啊啊啊啊啊啊啊啊"
+        android:textColor="#fff"
+        android:textSize="18sp" />
+    <!--        maxEms一行的最大字数-->
+
+</LinearLayout>

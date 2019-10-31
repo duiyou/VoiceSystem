@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.voicesystem">
+
     <!--录音权限-->
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
     <!--写文件权限-->
@@ -27,6 +29,11 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 
 
+
+
+
+
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -38,6 +45,16 @@
         <!--Android9.0加入了这个才能使用HTTP，android:usesCleartextTraffic="true"-->
         <!--Android9.0加入了此条信息才能够语音合成-->
         <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+
+        <!--百度语音的一些APPID-->
+        <meta-data android:name="com.baidu.speech.APP_ID"
+            android:value="17586406" />
+        <meta-data android:name="com.baidu.speech.API_KEY"
+            android:value="hgShGxfUNHGGNzLGMpUslHPB" />
+        <meta-data android:name="com.baidu.speech.SECRET_KEY"
+            android:value="0Qty537ving068YKl5o7MlqrT7CkTl4t" />
+        <!--百度语音添加了服务！！！！！出错了！！！！！！-->
+        <service android:name="com.baidu.speech.VoiceRecognitionService" android:exported="false" />
 
         <activity android:name=".MainActivity">
             <intent-filter>

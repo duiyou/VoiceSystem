@@ -5,4 +5,8 @@
     <string name="str_record_normal">按住说话</string>
     <string name="str_record_recording">松开结束</string>
     <string name="str_record_want_cancel">松开手指取消发送</string>
+
+    <!--翻译活动字符串-->
+    <string name="str_translate_chinese">中文</string>
+    <string name="str_translate_english">英文</string>
 </resources>
