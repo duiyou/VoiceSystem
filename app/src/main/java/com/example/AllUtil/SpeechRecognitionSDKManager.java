@@ -13,6 +13,13 @@ import org.json.JSONObject;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/**
+ * 语音识别工具类
+ * 参考：
+ * https://www.jianshu.com/p/2f21f12303c5
+ * https://blog.csdn.net/chaoyu168/article/details/88633959
+ */
+
 public class SpeechRecognitionSDKManager {
 
     private static final String TAG = "SpeechRecognitionSDKMan";
@@ -47,7 +54,7 @@ public class SpeechRecognitionSDKManager {
 
 
         //自己的
-        params.put(SpeechConstant.VAD_ENDPOINT_TIMEOUT,1500);//不开启长语音（1.5s则为超时，表示停止说话）
+        params.put(SpeechConstant.VAD_ENDPOINT_TIMEOUT,1200);//不开启长语音（1.5s则为超时，表示停止说话）
         //params.put(SpeechConstant.VAD, SpeechConstant.VAD_TOUCH);//不开启长语音时，超时则关闭语音活动检测，要手动关闭语音识别
         params.put(SpeechConstant.ACCEPT_AUDIO_VOLUME, false);//不需要音量回调
         params.put(SpeechConstant.ACCEPT_AUDIO_DATA, true);//需要音频数据回调
@@ -86,6 +93,8 @@ public class SpeechRecognitionSDKManager {
         cancel();
         //再始放资源
         asr.unregisterListener(e);
+        //单例为空
+        instance = null;
     }
 
 }

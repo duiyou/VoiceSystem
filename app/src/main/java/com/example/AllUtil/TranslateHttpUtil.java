@@ -75,6 +75,8 @@ public class TranslateHttpUtil {
 
             //返回过滤Json数据得到的真正翻译的结果
             return getRealResult(text);
+//            Log.d(TAG, "get: "+text);
+//            return text;
         } catch(Exception e){
             Log.d(TAG, "get得到翻译结果出错了");
         }
@@ -178,6 +180,7 @@ public class TranslateHttpUtil {
         JSONObject jsonObject = null;
         JSONObject jsonObject2 = null;
         try {
+            Log.d(TAG, "getRealResult所有结果: "+allResult);
             jsonObject = new JSONObject(allResult);
             //通过key（text）获取value，即获得机器人回复的结果
             String get_trans_result = jsonObject.getString("trans_result");
@@ -187,8 +190,10 @@ public class TranslateHttpUtil {
         } catch (JSONException e) {
             //e.printStackTrace();
             Log.d(TAG, "getRealResult得到翻译真正结果出错");
+        }finally {
+            return realResult;
         }
-        return realResult;
+
     }
 
 }

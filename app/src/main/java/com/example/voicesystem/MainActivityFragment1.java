@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 
 import com.example.ChatInterface.ChatActivity;
 import com.example.SpeechSetInterface.SpeechSetActivity;
+import com.example.TestInterface.TestActivity;
 import com.example.TranslateInterface.TranslateActivity;
 import com.example.TranslateInterface.TranslateButton;
 
@@ -28,6 +29,7 @@ public class MainActivityFragment1 extends Fragment implements View.OnClickListe
     private MainActivity mainActivity;
     private RelativeLayout relativeLayout1;
     private RelativeLayout relativeLayout2;
+    private RelativeLayout relativeLayout3;
     private RelativeLayout relativeLayout6;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -44,8 +46,10 @@ public class MainActivityFragment1 extends Fragment implements View.OnClickListe
         //语音翻译按钮
         relativeLayout2=view.findViewById(R.id.mainactivity_fragment1_bottom_relativelayout2);
         relativeLayout2.setOnClickListener(this);//设置监听
-        /***********其他按钮**********************/
 
+        //测试按钮
+        relativeLayout3=view.findViewById(R.id.mainactivity_fragment1_bottom_relativelayout3);
+        relativeLayout3.setOnClickListener(this);//设置监听
 
         //语音设置按钮
         relativeLayout6=view.findViewById(R.id.mainactivity_fragment1_bottom_relativelayout6);
@@ -64,10 +68,14 @@ public class MainActivityFragment1 extends Fragment implements View.OnClickListe
                 break;
             //语音翻译
             case R.id.mainactivity_fragment1_bottom_relativelayout2:
-                //开启ChatActivity
+                //开启TranslateActivity
                 TranslateActivity.actionStart((Context)mainActivity);
                 break;
             //语音设置
+            case R.id.mainactivity_fragment1_bottom_relativelayout3:
+                //开启TestActivity
+                TestActivity.actionStart((Context)mainActivity);
+                break;
             case R.id.mainactivity_fragment1_bottom_relativelayout6:
                 //开启ChatActivity
                 SpeechSetActivity.actionStart((Context)mainActivity);

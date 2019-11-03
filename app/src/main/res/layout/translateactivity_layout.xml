@@ -89,7 +89,7 @@
                     app:spb_mirror_mode="false"
                     app:spb_progressiveStart_activated="true"
                     app:spb_progressiveStart_speed="1.5"
-                    app:spb_progressiveStop_speed="5" />
+                    app:spb_progressiveStop_speed="10" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -114,7 +114,7 @@
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center">
                         <ImageButton
@@ -126,6 +126,16 @@
                             android:layout_margin="15dp"
                             android:padding="8dp"
                             android:background="@drawable/translateactivity_keyboardbutton"/>
+
+                        <com.tuyenmonkey.mkloader.MKLoader
+                            android:id="@+id/translate_activity_mkloader"
+                            android:layout_width="80dp"
+                            android:layout_height="15dp"
+                            android:layout_margin="15dp"
+                            android:padding="8dp"
+                            android:visibility="gone"
+                            app:mk_type="ThreePulse"
+                            app:mk_color="#1296db" />
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="0dp"
