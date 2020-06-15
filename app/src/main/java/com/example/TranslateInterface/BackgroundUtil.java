@@ -124,6 +124,7 @@ public class BackgroundUtil {
                 }
             } else if (name.equals(SpeechConstant.CALLBACK_EVENT_ASR_PARTIAL)) {
                 //临时识别结果, 长语音模式需要从此消息中取出结果
+                Log.d(TAG, "onEvent: 临时的全部结果：" + params);
                 String realResult = getRealResult(params);
                 Log.d(TAG, "onEvent: 临时得到的结果："+realResult);
                 if(mListener != null){

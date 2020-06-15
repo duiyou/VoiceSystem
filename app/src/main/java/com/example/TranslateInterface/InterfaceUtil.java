@@ -197,7 +197,7 @@ public class InterfaceUtil {
         }
     }
 
-    //**************************初始化语音按钮
+    //**************************初始化加载进度条控件
     private MKLoader mkLoader;
     private void initMKLoader(){
         if(translateActivity != null){

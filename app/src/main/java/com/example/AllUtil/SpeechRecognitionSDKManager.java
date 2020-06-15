@@ -28,6 +28,7 @@ public class SpeechRecognitionSDKManager {
     public static final int RECOGNITION_TYPE_ENGLISH = 17372;//英文
     public static final int RECOGNITION_TYPE_CANTONESE = 16372;//粤语
 
+
     //识别的功能类
     private EventManager asr;
     //识别参数集合

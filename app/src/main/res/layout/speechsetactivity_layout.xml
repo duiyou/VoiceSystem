@@ -167,7 +167,7 @@
             android:maxHeight="4dp"
             android:max="9"
             android:progress="5"
-            android:thumb="@drawable/seekbarbutton"/>
+            android:thumb="@drawable/seekbarbutton" />
         <!--参考https://blog.csdn.net/w8320273/article/details/7852752-->
         <TextView
             android:id="@+id/speechsetactivity_speechspeedtextview"
